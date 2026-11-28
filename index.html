@@ -1,7 +1,71 @@
 <!doctype html>
 <html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#123b32"><title>VV-NRWS PHASE-2 NALANDA</title>
 <style>
-body{margin:0;background:#f3f6f4;color:#17221e;font-family:system-ui,sans-serif}header{background:#123b32;color:white;padding:20px 16px}h1{font-size:20px;margin:0}header p{margin:5px 0 0;font-size:13px}main{max-width:720px;margin:16px auto;padding:0 12px}.card{background:white;border:1px solid #dce5df;border-radius:14px;padding:16px;margin:12px 0}h2{font-size:18px;margin:0 0 12px}label{display:block;font-size:13px;font-weight:600;margin:10px 0 5px}input,textarea,button{box-sizing:border-box;width:100%;padding:12px;border:1px solid #cbd8d0;border-radius:9px;font:inherit}textarea{min-height:85px}button{background:#176b51;color:white;border:0;font-weight:700;margin-top:10px}.secondary{background:#e8f0eb;color:#164c3a}.danger{background:#9b3434}.muted{color:#627169;font-size:13px}.hidden{display:none!important}#memberStatementPanel{scroll-margin-top:12px}.error{color:#a12626;font-size:13px;white-space:pre-wrap}.success{color:#176b51;font-size:13px}.row{display:flex;gap:8px}.row>*{flex:1}.status{display:inline-block;background:#edf4ef;color:#245a43;border-radius:20px;padding:3px 9px;font-size:12px}.item{border-top:1px solid #e4ebe6;padding:12px 0}nav{display:flex;gap:7px;flex-wrap:wrap}nav button{width:auto;margin:0}footer{text-align:center;color:#6b7770;font-size:12px;padding:24px}
+:root{
+ --forest:#075b35;--forest2:#0b7545;--leaf:#2d9b58;--mint:#e8f5eb;
+ --lime:#c9e8a7;--ink:#172b20;--muted:#64766a;--line:#dce9df;
+ --paper:#f4f8f3;--white:#fff;--gold:#f3c969;--shadow:0 8px 24px rgba(16,74,43,.08)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.5}
+header{position:relative;overflow:hidden;background:linear-gradient(120deg,#06452b 0%,#087344 55%,#36a65c 100%);color:#fff;padding:28px 18px 30px;isolation:isolate}
+header:before,header:after{content:"";position:absolute;border-radius:50%;z-index:-1;pointer-events:none}
+header:before{width:230px;height:230px;right:-70px;top:-115px;background:rgba(202,235,170,.18)}
+header:after{width:160px;height:160px;right:80px;bottom:-125px;border:1px solid rgba(255,255,255,.22)}
+header h1{font-size:clamp(21px,5vw,29px);font-weight:850;letter-spacing:.2px;margin:0;line-height:1.2}
+header p{margin:8px 0 0;font-size:13px;color:#e1f3e5;max-width:720px}
+main{width:min(100% - 24px,820px);margin:18px auto 36px;padding:0}
+.card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0;box-shadow:var(--shadow)}
+h2{font-size:18px;line-height:1.3;font-weight:800;color:#164b30;margin:0 0 14px}
+h3,h4{color:#20583a}
+p{margin-top:8px}
+label{display:block;font-size:13px;font-weight:750;color:#365844;margin:13px 0 6px}
+input,select,textarea{display:block;width:100%;min-height:46px;padding:12px 14px;border:1px solid #cbdccd;border-radius:12px;background:#fbfdfb;color:var(--ink);font:inherit;outline:none;transition:border-color .18s,box-shadow .18s}
+input:focus,select:focus,textarea:focus{border-color:var(--leaf);box-shadow:0 0 0 3px rgba(45,155,88,.13);background:#fff}
+textarea{min-height:100px;resize:vertical}
+button{width:100%;min-height:44px;padding:11px 15px;border:0;border-radius:13px;background:linear-gradient(135deg,var(--forest2),var(--leaf));color:#fff;font:inherit;font-weight:750;letter-spacing:.1px;margin-top:10px;box-shadow:0 4px 10px rgba(8,105,57,.14);cursor:pointer;transition:transform .15s,filter .15s}
+button:active{transform:scale(.985)}
+button:hover{filter:brightness(1.04)}
+button.secondary{background:#e8f4e9;color:#155b35;border:1px solid #d3e8d5;box-shadow:none}
+button.danger{background:#a93636;color:#fff}
+.hidden{display:none!important}
+.muted{color:var(--muted);font-size:13px}
+.error{color:#a12626;font-size:13px;white-space:pre-wrap}
+.success{color:#167347;font-size:13px}
+.row{display:flex;align-items:center;gap:10px}
+.row>*{flex:1;min-width:0}
+.status{display:inline-flex;align-items:center;gap:5px;background:#e7f5e9;color:#17633a;border:1px solid #d3ead7;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:700}
+nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:18px}
+nav button{width:100%;min-height:46px;margin:0;padding:9px 5px;border-radius:12px;font-size:13px;box-shadow:none}
+.item{border-top:1px solid #e5eee6;padding:14px 0}
+.item:first-child{border-top:0}
+footer{text-align:center;color:#718276;font-size:12px;padding:24px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#eaf5eb;color:#20583a;font-weight:800}
+th,td{padding:10px 9px;border-bottom:1px solid var(--line);text-align:left}
+.card .card{background:#f7fbf6;border:1px solid #dcebdd;box-shadow:none;border-radius:15px;padding:14px}
+#appSection>.card:first-child{background:linear-gradient(145deg,#fff 0%,#f3faf3 100%);border-color:#d2e7d5}
+#appSection #welcome{font-size:20px;margin-bottom:8px}
+#adminTab{border:1px solid #b9d9bd}
+#memberStatementPanel{scroll-margin-top:14px}
+#loginMsg,#regMsg,#forgotPasswordMsg,#passwordRecoveryMsg{min-height:1em}
+a{color:#087344}
+@media(min-width:650px){
+ header{padding:34px max(24px,calc((100vw - 820px)/2)) 36px}
+ main{margin-top:22px}
+ .card{padding:22px}
+ nav{max-width:620px}
+ nav button{font-size:14px}
+}
+@media(max-width:430px){
+ main{width:calc(100% - 18px);margin:10px auto 24px}
+ .card{padding:15px;border-radius:17px;margin:10px 0}
+ .row{gap:7px}
+ .row button{padding:10px 7px;font-size:13px}
+ nav{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+ nav button{font-size:12px;padding:8px 3px;min-height:43px}
+}
 </style></head><body>
 <header><h1>VV-NRWS PHASE-2 NALANDA</h1><p>वास्तु विहार नालंदा रेसिडेंशियल वेलफेयर सोसाइटी फेज-2 नालंदा</p></header><main>
 <div id="configWarning" class="card hidden"><b>सेटअप अधूरा है</b><p class="muted">config.js में Supabase Publishable Key भरें। Secret key कभी न डालें।</p></div>
