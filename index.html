@@ -42,13 +42,24 @@ $("authDiagnosticBtn").onclick=async()=>{
     const userResult=await sb.auth.getUser();
     if(userResult.error)throw userResult.error;
     const user=userResult.data?.user;
-    out.textContent=[
+    const lines=[
       "Session उपलब्ध: "+(!!session?"हाँ":"नहीं"),
       "Session User ID: "+(session?.user?.id||"नहीं मिला"),
       "getUser User ID: "+(user?.id||"नहीं मिला"),
       "Email: "+(user?.email||"नहीं मिला"),
       "दोनों ID समान: "+(session?.user?.id&&user?.id&&session.user.id===user.id?"हाँ":"नहीं")
-    ].join("\n");
+    ];
+    if(!session){
+      lines.push("RPC Auth Diagnostic: Session नहीं है, RPC नहीं चलाई गई।");
+    }else{
+      const rpcResult=await sb.rpc("vvnrws_auth_diagnostic");
+      if(rpcResult.error){
+        lines.push("RPC Auth Diagnostic Error: "+rpcResult.error.message);
+      }else{
+        lines.push("RPC Auth Diagnostic Result: "+JSON.stringify(rpcResult.data));
+      }
+    }
+    out.textContent=lines.join("\n");
   }catch(e){out.textContent="जाँच में त्रुटि: "+(e?.message||String(e));}
 };
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
